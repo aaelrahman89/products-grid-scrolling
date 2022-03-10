@@ -1,0 +1,7 @@
+.loader{
+    animation: opacity 1s infinite;
+}
+    @keyframes opacity{
+    0%{opacity:0;}
+    100%{opacity:1;}
+}

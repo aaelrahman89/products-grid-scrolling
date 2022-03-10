@@ -1,0 +1,9 @@
+.card-body{
+    height: 150px;
+    overflow: hidden;
+}
+.card-image-container{
+    height: 110px;
+    overflow: hidden;
+    line-height: 80px;
+}
