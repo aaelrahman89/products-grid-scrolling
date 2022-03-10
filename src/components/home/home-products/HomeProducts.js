@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import './HomeProducts.css';
@@ -10,14 +11,11 @@ function HomeProducts() {
   // states
   const [products, setproducts] = useState([]);
   const [totalCount, settotalCount] = useState(0);
-  const [showLoader, setshowLoader] = useState(true);
   const [currentPage, setcurrentPage] = useState(0);
   const [watch, setwatch] = useState(0);
   const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreListItems);
-  // const [activeSort, setactiveSort] = useState('id');
 
   // Logics
-
   function fetchMoreListItems() {
       setwatch(watch + 1);
     setTimeout(() => {
@@ -28,9 +26,7 @@ function HomeProducts() {
 
   // get products function
   const getProductsInit = () => {
-    setshowLoader(true);
     axios.get(`products?_page=${currentPage}&_limit=24&_sort=${activeSort}`).then(res => {
-      setshowLoader(false);
       settotalCount(Number(res.headers['x-total-count']));
       setproducts(products => [...products, ...res.data]);
     }).catch(err => console.log(err));
@@ -44,20 +40,7 @@ function HomeProducts() {
   // watch currentPage
   useEffect(() => {
     setcurrentPage(previousCount => previousCount += 1);
-  }, [watch])
-  
-
-  // const onClickTestAddToArray = () => {
-  //   if (window.innerHeight + document.documentElement.scrollTop === document.scrollingElement.scrollHeight) {
-  //       setwatch(watch + 1);
-  //       getProductsInit();
-  //   } 
-  // }
-
-  // useEffect(() => {
-  //    window.addEventListener('scroll', onClickTestAddToArray);
-  // }, [])
-  
+  }, [watch]) 
   
   // Filter Buttons Handling to remove active class first
   const removeFilterButtonsActiveClasses = () => {
@@ -83,8 +66,6 @@ function HomeProducts() {
     removeFilterButtonsActiveClasses();
     event.target.classList.add('text-primary');
   }
-  
-  
 
   return (
     <div className="container mt-2">
